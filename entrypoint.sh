@@ -1,11 +1,9 @@
-# echo "args $1"
-# echo "::set-output name=args::$1"
-
 #!/bin/sh
 
 set -e
 
-
+echo "args $1"
+# echo "::set-output name=args::$1"
 
 if [ -z "${IMPORT}" ]; then
   IMPORT="${GITHUB_REPOSITORY}"
@@ -25,7 +23,7 @@ mkdir -p "$(dirname "${WORKDIR}")"
 ln -s "${PWD}" "${WORKDIR}"
 cd "${WORKDIR}/${PROJECT_PATH}"
 
-sh -c "$*"
+sh -c "$1"
 
 # If a command was specified with `args="..."`, then run it.  Otherwise,
 # look for something useful to run.
