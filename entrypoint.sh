@@ -4,7 +4,9 @@ set -e
 
 echo "command $1"
 echo "repos $2"
-# echo "::set-output name=args::$1"
+echo "::set-output name=args::success"
+
+REPOS="$2"
 
 if [ -z "${IMPORT}" ]; then
   IMPORT="${GITHUB_REPOSITORY}"
@@ -21,10 +23,13 @@ fi
 # So symlink the repository into $GOPATH, and then cd to it.
 mkdir -p "$(dirname "${WORKDIR}")"
 ln -s "${PWD}" "${WORKDIR}"
-cd "${WORKDIR}/${PROJECT_PATH}/services/user_data"
 
 
-sh -c "$1"
+for repo in ${REPOS}; do
+    echo "Running $repo"
+    cd "${WORKDIR}/${PROJECT_PATH}/${repo}"
+    sh -c "$1"
+done
 
 # If a command was specified with `args="..."`, then run it.  Otherwise,
 # look for something useful to run.
