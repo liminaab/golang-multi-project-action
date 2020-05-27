@@ -23,7 +23,7 @@ echo ${PROJECT_PATH}
 # So symlink the repository into $GOPATH, and then cd to it.
 mkdir -p "$(dirname "${WORKDIR}")"
 ln -s "${PWD}" "${WORKDIR}"
-cd "${WORKDIR}/${PROJECT_PATH}"
+cd "${WORKDIR}/${PROJECT_PATH}/services/user_data"
 
 
 sh -c "$1"
