@@ -1,0 +1,14 @@
+name: 'Test and build'
+description: 'Testing and building'
+inputs:
+  args:  # id of input
+    description: 'Arguments'
+    required: true
+outputs:
+  status: # id of output
+    description: 'Status'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.args }}
