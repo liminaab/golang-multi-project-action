@@ -1,14 +1,18 @@
-name: 'Test and build'
-description: 'Testing and building'
+name: 'Go multi-project action'
+description: 'Run command on multiple go projects'
 inputs:
-  args:  # id of input
-    description: 'Arguments'
+  command:
+    description: 'Command to execute'
+    required: true
+  repositories: 
+    description: 'Projects to execute on'
     required: true
 outputs:
-  status: # id of output
-    description: 'Status'
+  status:
+    description: 'Status of execution'
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.args }}
+    - ${{ inputs.command }}
+    - ${{ inputs.repositories }}

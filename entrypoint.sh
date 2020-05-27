@@ -2,21 +2,19 @@
 
 set -e
 
-echo "args $1"
+echo "command $1"
+echo "repos $2"
 # echo "::set-output name=args::$1"
 
 if [ -z "${IMPORT}" ]; then
   IMPORT="${GITHUB_REPOSITORY}"
 fi
-echo ${IMPORT}
 WORKDIR="${GOPATH}/src/github.com/${IMPORT}"
 
 # PROJECT_PATH specifies the subdirectory in the working directory that the Go project is
 if [ -z "${PROJECT_PATH}" ]; then
   PROJECT_PATH="."
 fi
-
-echo ${PROJECT_PATH}
 
 # Go can only find dependencies if they're under $GOPATH/src.
 # GitHub Actions mounts your repository outside of $GOPATH.
