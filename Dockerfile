@@ -1,8 +1,15 @@
-# Container image that runs your code
-FROM alpine:3.10
+FROM golang:1.14
 
-# Copies your code file from your action repository to the filesystem path `/` of the container
+LABEL name="Golang Action for multiple projects"
+LABEL maintainer="Andreas Fürst"
+LABEL version="1.0.0"
+
+LABEL com.github.actions.name="Golang Action for multiple projects"
+LABEL com.github.actions.description="Run Golang commands"
+LABEL com.github.actions.icon="box"
+LABEL com.github.actions.color="blue"
+
 COPY entrypoint.sh /entrypoint.sh
 
-# Code file to execute when the docker container starts up (`entrypoint.sh`)
 ENTRYPOINT ["/entrypoint.sh"]
+CMD [""]
