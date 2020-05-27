@@ -9,7 +9,7 @@ if [ -z "${IMPORT}" ]; then
   IMPORT="${GITHUB_REPOSITORY}"
 fi
 echo ${IMPORT}
-WORKDIR="${GOPATH}/src/github.com/${IMPORT}"
+WORKDIR="${GOPATH}/src/github.com/${IMPORT}/services/user_data"
 
 # PROJECT_PATH specifies the subdirectory in the working directory that the Go project is
 if [ -z "${PROJECT_PATH}" ]; then
@@ -22,6 +22,7 @@ fi
 mkdir -p "$(dirname "${WORKDIR}")"
 ln -s "${PWD}" "${WORKDIR}"
 cd "${WORKDIR}/${PROJECT_PATH}"
+
 
 sh -c "$1"
 
