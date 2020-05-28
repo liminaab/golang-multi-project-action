@@ -27,7 +27,7 @@ ln -s "${PWD}" "${WORKDIR}"
 
 for repo in ${REPOS}; do
     echo "Running $repo"
-    cd "${WORKDIR}/${repo}"
+    cd "${WORKDIR}/${PROJECT_PATH}/${repo}"
     sh -c "$1"
 done
 
