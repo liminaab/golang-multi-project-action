@@ -8,8 +8,6 @@ echo "::set-output name=args::success"
 
 REPOS="$2"
 
-REPO_ROOT_DIR="$PWD"
-
 if [ -z "${IMPORT}" ]; then
   IMPORT="${GITHUB_REPOSITORY}"
 fi
@@ -30,16 +28,15 @@ ln -s "${PWD}" "${WORKDIR}"
 for repo in ${REPOS}; do
     echo "Running $repo"
 
-    #cd "${REPO_ROOT_DIR}"
-
-    DIR="${REPO_ROOT_DIR}/${WORKDIR}/${PROJECT_PATH}/${repo}"
-    if ls ${DIR}/*.go &>/dev/null
+    DIR="${WORKDIR}/${PROJECT_PATH}/${repo}"
+    GO=$(find "$DIR" -name *.go|head -n1)
+    if [ ! -z "$GO" ]
     then
-        echo "Found."
+        echo "Found"
         cd "${WORKDIR}/${PROJECT_PATH}/${repo}"
         sh -c "$1"
     else
-        echo "Not found."
+        echo "Not found"
     fi
 done
 
