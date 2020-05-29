@@ -27,8 +27,16 @@ ln -s "${PWD}" "${WORKDIR}"
 
 for repo in ${REPOS}; do
     echo "Running $repo"
-    cd "${WORKDIR}/${PROJECT_PATH}/${repo}"
-    sh -c "$1"
+
+    DIR="${WORKDIR}/${PROJECT_PATH}/${repo}"
+    if ls ${DIR}/*.go &>/dev/null
+    then
+        echo "Found."
+        cd "${WORKDIR}/${PROJECT_PATH}/${repo}"
+        sh -c "$1"
+    else
+        echo "Not found."
+    fi
 done
 
 # If a command was specified with `args="..."`, then run it.  Otherwise,
