@@ -32,11 +32,11 @@ for repo in ${REPOS}; do
     GO=$(find "$DIR" -name *.go|head -n1)
     if [ ! -z "$GO" ]
     then
-        echo "Found"
+        echo "Found GO app"
         cd "${WORKDIR}/${PROJECT_PATH}/${repo}"
         sh -c "$1"
     else
-        echo "Not found"
+        echo "No GO app. Continue"
     fi
 done
 
