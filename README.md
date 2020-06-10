@@ -2,7 +2,7 @@
 
 ## Usage
 ```bash
-uses: liminaab/test_and_build_action
+uses: liminaab/golang-multi-project-action@vx.x.x
 with:
     command: 'go test ./..'
 ```
