@@ -1,1 +1,1 @@
-# Go multi-project action
+# Golang multi-project action
