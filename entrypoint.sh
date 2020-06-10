@@ -2,9 +2,7 @@
 
 set -e
 
-echo "command $1"
-echo "repos $2"
-echo "::set-output name=args::success"
+#echo "::set-output name=args::success"
 
 REPOS="$2"
 
@@ -24,58 +22,15 @@ fi
 mkdir -p "$(dirname "${WORKDIR}")"
 ln -s "${PWD}" "${WORKDIR}"
 
-
 for repo in ${REPOS}; do
-    echo "Running $repo"
-
     DIR="${WORKDIR}/${PROJECT_PATH}/${repo}"
     GO=$(find "$DIR" -name *.go|head -n1)
     if [ ! -z "$GO" ]
     then
-        echo "Found GO app"
+        echo "Running command on $repo..."
         cd "${WORKDIR}/${PROJECT_PATH}/${repo}"
         sh -c "$1"
     else
-        echo "No GO app. Continue"
+        echo "$repo not a GO project. Skipping..."
     fi
 done
-
-# If a command was specified with `args="..."`, then run it.  Otherwise,
-# look for something useful to run.
-# if [ $# -eq 0 ] || [ "$*" = "" ]; then
-#   if [ -r Makefile ]; then
-#     make
-#   else
-#     if [ -r go.mod ]; then
-#       export GO111MODULE=on
-#       # Check if using vendored dependencies
-#       if [ -d "vendor" ]; then
-#         export GOFLAGS="-mod=vendor"
-#       else
-#         # Ensure no go.mod changes are made that weren't committed
-#         export GOFLAGS="-mod=readonly"
-#       fi
-#     else
-#       if [ -r Gopkg.toml ]; then
-#         # Check if using vendored dependencies
-#         if [ -d "vendor" ]; then
-#           # Check that dep is in sync with /vendor dependencies and that running dep ensure doesn't result in modifications to Gopkg.lock/Gopkg.toml
-#           "$GOPATH/bin/dep" ensure && "$GOPATH/bin/dep" check
-#           git_workspace_status="$(git status --porcelain)"
-#           if [ -n "${git_workspace_status}" ]; then
-#             echo "Unexpected changes were found in dep /vendored. Please run $(dep ensure) and commit changes:";
-#             echo "${git_workspace_status}";
-#             exit 1;
-#           fi
-#         else
-#           # Run dep ensure to download and sync dependencies
-#           "$GOPATH/bin/dep" ensure
-#         fi
-#       fi
-#     fi
-#     go build ./...
-#     go test ./...
-#   fi
-# else
-#   sh -c "$*"
-# fi

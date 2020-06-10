@@ -1,1 +1,1 @@
-# test_and_build_action
+# Go multi-project action

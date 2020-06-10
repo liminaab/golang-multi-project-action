@@ -1,5 +1,5 @@
 name: 'Go multi-project action'
-description: 'Run command on multiple go projects'
+description: 'Run command on multiple Go projects'
 inputs:
   command:
     description: 'Command to execute'
